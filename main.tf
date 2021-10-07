@@ -11,13 +11,16 @@ terraform {
 provider "aws" {
 }
 
-resource "aws_vpc" "terra-test" {
-  cidr_block = "10.0.0.0/16"
+module "terra-test1" {
+  source="./modules/network/vpc"
+
+  cidr          = "11.0.0.0/16"
 }
 
-module "terra-test1" {
-  source="./modules/"
+module "private-1a" {
+  source="./modules/network/subnets"
 
-  cidr_block           = "11.0.0.0/16"
-
+  vpc_id     = aws_vpc.terra-test1.id
+  cidr       = "11.0.1.0/24"
+  azone = "us-west-1a"
 }
