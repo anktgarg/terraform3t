@@ -1,35 +1,57 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.0"
-    }
-  }
-}
 
 # Configure the AWS Provider
 provider "aws" {
+  region = "us-west-2"
 }
 
-# resource "aws_vpc" "terra" {
-#   cidr_block = "10.0.0.0/16"
-# }
  
-module "terra-test1" {
+module "main_vpc" {
   source = "./modules/network/vpc"
 
   cidr          = "11.0.0.0/16"
 }
 
-module "private-1a" {
+module "private-2a" {
   source = "./modules/network/subnets"
 
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = module.main_vpc.vpc_id
   cidr       = "11.0.1.0/24"
-  azone      = "us-west-1a"
+  azone      = "us-west-2a"
 }  
 
-output "vpc_id" {
+module "private-2b" {
+  source = "./modules/network/subnets"
 
-    value = aws_vpc.main.id
+  vpc_id     = module.main_vpc.vpc_id
+  cidr       = "11.0.3.0/24"
+  azone      = "us-west-2b"
+}
+
+module "public-2a" {
+  source = "./modules/network/subnets"
+
+  vpc_id     = module.main_vpc.vpc_id
+  cidr       = "11.0.2.0/24"
+  azone      = "us-west-2a"
+}
+
+module "public-2b" {
+  source = "./modules/network/subnets"
+
+  vpc_id     = module.main_vpc.vpc_id
+  cidr       = "11.0.4.0/24"
+  azone      = "us-west-2b"
+}
+
+module "igw" {
+  source = "./modules/network/igw"
+
+  vpc_id     = module.main_vpc.vpc_id
+}
+
+module "public-rt" {
+  source = "./modules/network/routetable"
+
+  vpc_id     = module.main_vpc.vpc_id
+  igw_id     = module.igw.igw_id
 }
