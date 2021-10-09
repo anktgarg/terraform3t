@@ -3,10 +3,10 @@ variable "launch_configuration" {
   type        = string
 }
 
-variable "subnet_ids" {
-  description = "The VPC ID."
-  type        = list(string)
-}
+# variable "subnet_ids" {
+#   description = "The VPC ID."
+#   type        = list(string)
+# }
 
 variable "min_size" {
   description = "The VPC ID."
