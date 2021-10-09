@@ -1,7 +1,7 @@
 resource "aws_autoscaling_group" "asg" {
 
   launch_configuration = var.launch_configuration
-  availability_zones  = ["${var.availability_zones}"]
+  subnet_ids  = ["${var.subnet_ids}"]
 
   min_size                  = var.min_size
   max_size                  = var.max_size
