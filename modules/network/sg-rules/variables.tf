@@ -23,11 +23,11 @@ variable "security_group_id" {
   type        = string
 }
 
-variable "cidr_blocks" {
-  description = "Required: List of CIDR blocks. Cannot be specified with source_security_group_id or self."
-  type        = string
-  default     = ""
-}
+# variable "cidr_blocks" {
+#   description = "Required: List of CIDR blocks. Cannot be specified with source_security_group_id or self."
+#   type        = string
+#   default     = ""
+# }
 
 variable "description" {
   description = "Description of the rule."
