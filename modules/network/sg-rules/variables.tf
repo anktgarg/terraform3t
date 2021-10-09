@@ -26,10 +26,17 @@ variable "security_group_id" {
 variable "cidr_blocks" {
   description = "Required: List of CIDR blocks. Cannot be specified with source_security_group_id or self."
   type        = string
+  default     = ""
 }
 
 variable "description" {
   description = "Description of the rule."
+  type        = string
+  default     = ""
+}
+
+variable "source_security_group_id" {
+  description = "Security group id to allow access to/from, depending on the type."
   type        = string
   default     = ""
 }

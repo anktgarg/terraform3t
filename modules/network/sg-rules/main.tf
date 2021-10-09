@@ -6,4 +6,5 @@ resource "aws_security_group_rule" "sg-rules" {
   cidr_blocks       = [var.cidr_blocks]
   security_group_id = var.security_group_id
   description       = var.description
+  source_security_group_id = var.source_security_group_id
 }
