@@ -9,7 +9,7 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "azone" {
+variable "availability_zone" {
   description = "The AZ for the subnet."
   type        = string
 }
