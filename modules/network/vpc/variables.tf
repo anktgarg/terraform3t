@@ -22,9 +22,4 @@ variable "enable_dns_support" {
   default     = "true"
 }
 
-variable "default_tags" {
-    type = map
-    default = {
-        environment = "Dev"
-    }
-}
+variable "default_tags" {}
