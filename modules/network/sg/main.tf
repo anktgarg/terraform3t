@@ -4,11 +4,15 @@ resource "aws_security_group" "sg" {
 
   ingress = [
     {
-      description      = "Web from VPC"
-      from_port        = 80
-      to_port          = 80
+      description      = "TLS from VPC"
+      from_port        = 443
+      to_port          = 443
       protocol         = "tcp"
-      cidr_blocks      = "0.0.0.0/0"
+      cidr_blocks      = [aws_vpc.vpc.cidr_block]
+      ipv6_cidr_blocks = [aws_vpc.vpc.ipv6_cidr_block]
+      prefix_list_ids  = []
+      security_groups  = []
+      self = false
     }
   ]
 
