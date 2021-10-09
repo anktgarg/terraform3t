@@ -12,7 +12,6 @@ variable "instance_type" {
 variable "key_name" {
   description = "The VPC ID."
   type        = any
-  default   = file("/home/azureuser/key.pem")
 }
 
 variable "security_groups" {
