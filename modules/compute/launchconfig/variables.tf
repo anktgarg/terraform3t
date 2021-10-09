@@ -16,7 +16,7 @@ variable "key_name" {
 
 variable "security_groups" {
   description = "The VPC ID."
-  type        = sting
+  type        = string
 }
 
 
