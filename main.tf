@@ -74,7 +74,7 @@ module "public-rt" {
 module "public-routes" {
   source    = "./modules/network/routes"
   route_table_id            = module.public-rt.route_table_id
-  destination_cidr_block    = 0.0.0.0/0
+  destination_cidr_block    = "0.0.0.0/0"
   gateway_id = module.igw.igw_id
   # nat_gateway_id = var.nat_gatway_id
 }
