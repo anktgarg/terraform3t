@@ -1,7 +1,7 @@
 resource "aws_internet_gateway" "igw" {
   vpc_id = var.vpc_id
 
-  tags = {
-    Name = "ch1-igw"
-  }
+  tags = merge(tomap(
+        { "module" = "module/network/igw" }
+    ), var.default_tags)
 }

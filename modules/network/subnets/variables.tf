@@ -13,3 +13,5 @@ variable "azone" {
   description = "The AZ for the subnet."
   type        = string
 }
+
+variable "default_tags" {}
