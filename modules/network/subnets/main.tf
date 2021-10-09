@@ -7,3 +7,8 @@ resource "aws_subnet" "private" {
     app = "webapp"
   }
 }
+
+
+output "subnet_id" {
+  value = aws_subnet.private.id
+}

@@ -10,3 +10,7 @@ resource "aws_route_table" "public-rt" {
     Name = "example"
   }
 }
+
+output "route_table_id" {
+  value = aws_route_table.public-rt.id
+}
