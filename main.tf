@@ -85,7 +85,7 @@ module "launchconfig" {
   source    = "./modules/compute/launchconfig"
   image_id                    = data.aws_ami.ubuntu.id
   instance_type               = "t2.micro"
-  key_name                    = file("/home/azureuser/key.pem")
+  # key_name                    = file("/home/azureuser/key.pem")
   security_groups             = module.web_sg.web_sg_id
   associate_public_ip_address = false
 }
