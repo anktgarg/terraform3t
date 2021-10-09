@@ -4,6 +4,6 @@ variable "subnet_id" {
 }
 
 variable "route_table_id" {
-  description = "The VPC ID."
+  description = "The ID of the routing table."
   type        = string
 }
