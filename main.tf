@@ -7,7 +7,7 @@ provider "aws" {
  
 module "main_vpc" {
   source    = "./modules/network/vpc"
-  cidr      = "11.0.0.0/16"
+  cidr      = var.cidr
   default_tags = merge(tomap(
       {"Name" = "Test-vpc"}
     ), var.default_tags)
@@ -16,8 +16,8 @@ module "main_vpc" {
 # module "private-2a" {
 #   source    = "./modules/network/subnets"
 #   vpc_id    = module.main_vpc.vpc_id
-#   cidr      = "11.0.1.0/24"
-#   availability_zone     = "us-west-2a"
+#   cidr      = var.cidr_private-2a
+#   availability_zone     = var.availability_zone-2a
 #   default_tags = merge(tomap(
 #       {"Name" = "Test-private-2a"}
 #     ), var.default_tags)
@@ -26,8 +26,8 @@ module "main_vpc" {
 # module "private-2b" {
 #   source    = "./modules/network/subnets"
 #   vpc_id    = module.main_vpc.vpc_id
-#   cidr      = "11.0.3.0/24"
-#   availability_zone     = "us-west-2b"
+#   cidr      = var.cidr_private-2b
+#   availability_zone     = var.availability_zone-2b
 #   default_tags = merge(tomap(
 #       {"Name" = "Test-private-2b"}
 #     ), var.default_tags)
@@ -36,8 +36,8 @@ module "main_vpc" {
 # module "public-2a" {
 #   source    = "./modules/network/subnets"
 #   vpc_id    = module.main_vpc.vpc_id
-#   cidr      = "11.0.2.0/24"
-#   availability_zone     = "us-west-2a"
+#   cidr      = var.cidr_public-2a
+#   availability_zone     = var.availability_zone-2a
 #   default_tags = merge(tomap(
 #       {"Name" = "Test-public-2a"}
 #     ), var.default_tags)
@@ -46,8 +46,8 @@ module "main_vpc" {
 # module "public-2b" {
 #   source    = "./modules/network/subnets"
 #   vpc_id    = module.main_vpc.vpc_id
-#   cidr      = "11.0.4.0/24"
-#   availability_zone     = "us-west-2b"
+#   cidr      = var.cidr_public-2b
+#   availability_zone     = var.availability_zone-2b
 #   default_tags = merge(tomap(
 #       {"Name" = "Test-public-2b"}
 #     ), var.default_tags)
@@ -74,7 +74,7 @@ module "public-rt" {
 module "public-routes" {
   source    = "./modules/network/routes"
   route_table_id            = module.public-rt.route_table_id
-  destination_cidr_block    = "0.0.0.0/0"
+  destination_cidr_block    = var.destination_cidr_block-public_route
   gateway_id = module.igw.igw_id
   # nat_gateway_id = var.nat_gatway_id
 }
