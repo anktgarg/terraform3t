@@ -7,10 +7,6 @@ resource "aws_route_table" "public-rt" {
   }
 
   tags = {
-    Name = "example"
+    Name = "ch1-public-rt"
   }
-}
-
-output "route_table_id" {
-  value = aws_route_table.public-rt.id
 }
