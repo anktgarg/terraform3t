@@ -60,3 +60,7 @@ module "rta-2b" {
   subnet_id    = module.public-2b.subnet_id
   route_table_id   = module.public-rt.route_table_id
 }
+
+module "launchconfig" {
+  source    = "./modules/compute/launchconfig"
+}
