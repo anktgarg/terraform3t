@@ -151,7 +151,7 @@ module "logic-sg" {
     ), var.default_tags)
 }
 
-module "web-sg-rule" {
+module "logic-sg-rule" {
   source    = "./modules/network/sg-rules"
   type              = var.type_ingress
   from_port         = var.from_port_ssh
