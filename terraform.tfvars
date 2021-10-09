@@ -2,7 +2,7 @@ default_tags = {
         "env" = "test"
     }
 
-cidr                 = "11.0.0.0/16"
+cidr_block                 = "11.0.0.0/16"
 
 cidr_private-2a      = "11.0.1.0/24"
 cidr_private-2b      = "11.0.3.0/24"

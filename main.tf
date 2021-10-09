@@ -121,7 +121,7 @@ module "public-sg-rule" {
   from_port         = var.from_port_http
   to_port           = var.to_port_http
   protocol          = var.protocol_tcp
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = "0.0.0.0/0"
   security_group_id = module.public-sg.sg_id
 }
 
@@ -139,7 +139,7 @@ module "web-sg-rule" {
   from_port         = var.from_port_ssh
   to_port           = var.to_port_ssh
   protocol          = var.protocol_tcp
-  cidr_blocks       = [module.public-sg.sg_id]
+  cidr_blocks       = module.public-sg.sg_id
   security_group_id = module.web-sg.sg_id
 }
 
@@ -157,7 +157,7 @@ module "logic-sg-rule" {
   from_port         = var.from_port_ssh
   to_port           = var.to_port_ssh
   protocol          = var.protocol_tcp
-  cidr_blocks       = [module.public-sg.sg_id]
+  cidr_blocks       = module.public-sg.sg_id
   security_group_id = module.logic-sg.sg_id
 }
 
@@ -175,7 +175,7 @@ module "db-sg-rule" {
   from_port         = var.from_port_db
   to_port           = var.to_port_db
   protocol          = var.protocol_tcp
-  cidr_blocks       = [module.public-sg.sg_id]
+  cidr_blocks       = module.public-sg.sg_id
   security_group_id = module.db-sg.sg_id
 }
 
