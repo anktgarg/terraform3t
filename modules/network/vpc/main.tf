@@ -1,4 +1,4 @@
-resource "aws_vpc" "main" {
+resource "aws_vpc" "vpc" {
 
   cidr_block           = var.cidr
   instance_tenancy     = var.instance_tenancy
@@ -8,9 +8,4 @@ resource "aws_vpc" "main" {
   tags = merge(tomap(
         { "module" = "module/network/vpc" }
     ), var.default_tags)
-}
-
-output "vpc_id" {
-
-value = aws_vpc.main.id
 }

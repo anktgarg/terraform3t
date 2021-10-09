@@ -1,3 +1,3 @@
 default_tags = {
-        "trt" = "tested"
+        "env" = "test"
     }
