@@ -56,7 +56,7 @@ module "rta-2a" {
 }
 
 module "rta-2b" {
-  source    = "./modules/network/routert-association"
+  source    = "./modules/network/rt-association"
   vpc_id    = module.public-2b.subnet_id
   igw_id    = module.public-rt.route_table_id
 }
