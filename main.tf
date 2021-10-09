@@ -93,7 +93,6 @@ module "launchconfig" {
 module "web-asg" {
   source = "./modules/compute/asg"
   launch_configuration = module.launchconfig.lc_id
-  subnet_ids = ["module.private-2a.subnet_id","module.private-2b.subnet_id"]
   min_size                  = 1
   max_size                  = 3
   desired_capacity          = 2
