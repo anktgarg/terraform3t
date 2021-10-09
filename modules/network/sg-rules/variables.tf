@@ -37,5 +37,5 @@ variable "description" {
 variable "self" {
   description = "Whether the security group itself will be added as a source to this ingress rule."
   type        = bool
-  default     = "false"
+  default     = ""
 }
