@@ -115,15 +115,15 @@ module "public-sg" {
     ), var.default_tags)
 }
 
-module "public-sg-rule" {
-  source    = "./modules/network/sg-rules"
-  type              = var.type_ingress
-  from_port         = var.from_port_http
-  to_port           = var.to_port_http
-  protocol          = var.protocol_tcp
-  cidr_blocks       = "0.0.0.0/0"
-  security_group_id = module.public-sg.sg_id
-}
+# module "public-sg-rule" {
+#   source    = "./modules/network/sg-rules"
+#   type              = var.type_ingress
+#   from_port         = var.from_port_http
+#   to_port           = var.to_port_http
+#   protocol          = var.protocol_tcp
+#   cidr_blocks       = "0.0.0.0/0"
+#   security_group_id = module.public-sg.sg_id
+# }
 
 module "web-sg" {
   source    = "./modules/network/sg"
