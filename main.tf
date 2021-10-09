@@ -53,13 +53,13 @@ module "main_vpc" {
 #     ), var.default_tags)
 # }
 
-# module "igw" {
-#   source    = "./modules/network/igw"
-#   vpc_id    = module.main_vpc.vpc_id
-#   default_tags = merge(tomap(
-#       {"Name" = "Test-igw"}
-#     ), var.default_tags)
-# }
+module "igw" {
+  source    = "./modules/network/igw"
+  vpc_id    = module.main_vpc.vpc_id
+  default_tags = merge(tomap(
+      {"Name" = "Test-igw"}
+    ), var.default_tags)
+}
 
 module "public-rt" {
   source    = "./modules/network/routetable"
@@ -78,7 +78,7 @@ module "public-routes" {
   source    = "./modules/network/routes"
   route_table_id            = module.public-rt.route_table_id
   destination_cidr_block    = var.destination_cidr_block-public_route
-  gateway_id = module.igw.igw_id
+  gateway_id                = module.igw.igw_id
 }
 
 # module "rta-2a" {
