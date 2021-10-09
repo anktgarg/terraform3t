@@ -10,9 +10,6 @@ resource "aws_vpc" "main" {
     ), var.default_tags)
 }
 
-
-}
-
 output "vpc_id" {
 
 value = aws_vpc.main.id
