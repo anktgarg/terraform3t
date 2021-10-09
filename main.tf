@@ -61,6 +61,31 @@ module "rta-2b" {
   route_table_id   = module.public-rt.route_table_id
 }
 
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+module "web_sg" {
+  source    = "./modules/network/sg"
+  vpc_id    = module.main_vpc.vpc_id
+}
+
 module "launchconfig" {
   source    = "./modules/compute/launchconfig"
+  image_id                    = data.aws_ami.ubuntu.id
+  instance_type               = "t2.micro"
+  key_name                    = "https://terraform-state-0712.s3.us-west-2.amazonaws.com/key.txt"
+  security_groups             = module.web_sg.web_sg_id
+  associate_public_ip_address = false
 }
