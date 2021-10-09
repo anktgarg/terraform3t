@@ -85,7 +85,7 @@ module "launchconfig" {
   source    = "./modules/compute/launchconfig"
   image_id                    = data.aws_ami.ubuntu.id
   instance_type               = "t2.micro"
-  key_name                    = "https://terraform-state-0712.s3.us-west-2.amazonaws.com/key.txt"
+  # key_name                    = "https://terraform-state-0712.s3.us-west-2.amazonaws.com/key.txt"
   security_groups             = module.web_sg.web_sg_id
   associate_public_ip_address = false
 }
