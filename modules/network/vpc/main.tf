@@ -5,8 +5,8 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = var.enable_dns_hostnames
   enable_dns_support   = var.enable_dns_support
 
-  tags = merge(map(
-        "module", "module/network/vpc"
+  tags = merge(tomap(
+        { "module" = "module/network/vpc" }
     ), var.default_tags)
 }
 

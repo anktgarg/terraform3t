@@ -8,9 +8,8 @@ provider "aws" {
 module "main_vpc" {
   source    = "./modules/network/vpc"
   cidr      = "11.0.0.0/16"
-  default_tags = merge(map(
-      "Name", "Test-vpc",
-      "vpc_tag", "vpc"
+  default_tags = merge(tomap(
+      {"Name" = "Test-vpc"}
     ), var.default_tags)
 }
 
