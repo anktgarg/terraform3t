@@ -64,6 +64,9 @@ module "main_vpc" {
 module "public-rt" {
   source    = "./modules/network/routetable"
   vpc_id    = module.main_vpc.vpc_id
+    default_tags = merge(tomap(
+      {"Name" = "Test-public-rt"}
+    ), var.default_tags)
 }
 
 # module "private-rt" {
@@ -76,7 +79,6 @@ module "public-routes" {
   route_table_id            = module.public-rt.route_table_id
   destination_cidr_block    = var.destination_cidr_block-public_route
   gateway_id = module.igw.igw_id
-  # nat_gateway_id = var.nat_gatway_id
 }
 
 # module "rta-2a" {
