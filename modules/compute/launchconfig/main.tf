@@ -10,3 +10,7 @@ resource "aws_launch_configuration" "this" {
     create_before_destroy = true
   }
 }
+
+output "lc_id" {
+  value = aws_launch_configuration.this.id
+}

@@ -89,3 +89,12 @@ module "launchconfig" {
   security_groups             = module.web_sg.web_sg_id
   associate_public_ip_address = false
 }
+
+module "web-asg" {
+  source = "./modules/compute/asg"
+  launch_configuration = module.launchconfig.lc_id
+  availability_zones = ["us-west-2a","us-west-2b"]
+  min_size                  = 1
+  max_size                  = 3
+  desired_capacity          = 2
+}
