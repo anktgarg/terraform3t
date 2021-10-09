@@ -6,7 +6,7 @@ provider "aws" {
  
 module "main_vpc" {
   source    = "./modules/network/vpc"
-  cidr      = var.cidr
+  cidr      = var.cidr_block
   default_tags = merge(tomap(
       {"Name" = "Test-vpc"}
     ), var.default_tags)
@@ -106,6 +106,79 @@ module "rta-private-2b" {
   subnet_id    = module.private-2b.subnet_id
   route_table_id   = module.private-rt.route_table_id
 }
+
+module "public-sg" {
+  source    = "./modules/network/sg"
+  vpc_id    = module.main_vpc.vpc_id
+  default_tags = merge(tomap(
+      {"Name" = "Test-public-sg"}
+    ), var.default_tags)
+}
+
+module "public-sg-rule" {
+  source    = "./modules/network/sg-rules"
+  type              = var.type_ingress
+  from_port         = var.from_port_http
+  to_port           = var.to_port_http
+  protocol          = var.protocol_tcp
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = module.public-sg.sg_id
+}
+
+module "web-sg" {
+  source    = "./modules/network/sg"
+  vpc_id    = module.main_vpc.vpc_id
+  default_tags = merge(tomap(
+      {"Name" = "Test-web-sg"}
+    ), var.default_tags)
+}
+
+module "web-sg-rule" {
+  source    = "./modules/network/sg-rules"
+  type              = var.type_ingress
+  from_port         = var.from_port_ssh
+  to_port           = var.to_port_ssh
+  protocol          = var.protocol_tcp
+  cidr_blocks       = [module.public-sg.sg_id]
+  security_group_id = module.web-sg.sg_id
+}
+
+module "logic-sg" {
+  source    = "./modules/network/sg"
+  vpc_id    = module.main_vpc.vpc_id
+  default_tags = merge(tomap(
+      {"Name" = "Test-logic-sg"}
+    ), var.default_tags)
+}
+
+module "web-sg-rule" {
+  source    = "./modules/network/sg-rules"
+  type              = var.type_ingress
+  from_port         = var.from_port_ssh
+  to_port           = var.to_port_ssh
+  protocol          = var.protocol_tcp
+  cidr_blocks       = [module.public-sg.sg_id]
+  security_group_id = module.logic-sg.sg_id
+}
+
+module "db-sg" {
+  source    = "./modules/network/sg"
+  vpc_id    = module.main_vpc.vpc_id
+  default_tags = merge(tomap(
+      {"Name" = "Test-db-sg"}
+    ), var.default_tags)
+}
+
+module "db-sg-rule" {
+  source    = "./modules/network/sg-rules"
+  type              = var.type_ingress
+  from_port         = var.from_port_db
+  to_port           = var.to_port_db
+  protocol          = var.protocol_tcp
+  cidr_blocks       = [module.public-sg.sg_id]
+  security_group_id = module.db-sg.sg_id
+}
+
 
 
 # data "aws_ami" "ubuntu" {
